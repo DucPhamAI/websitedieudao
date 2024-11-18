@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
+    <title>DUCDIEUDAO</title>
     <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #eef2f7;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
         }
 
         .login-container {
@@ -22,6 +26,8 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin: 50px auto;
+            max-width: 400px;
         }
 
         .login-container h1 {
@@ -29,7 +35,7 @@
             margin-bottom: 20px;
         }
 
-        .login-container input {
+        .login-container input, .login-container select {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -50,10 +56,113 @@
         .login-container button:hover {
             background-color: #a156b2;
         }
+
+        .hidden {
+            display: none;
+        }
+
+        header {
+            background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #6a1b9a;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #6a1b9a;
+        }
+
+        .details {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        .rating {
+            margin-top: 10px;
+            color: #ffb400;
+        }
+
+        .product-card button {
+            background-color: #8e24aa;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card button:hover {
+            background-color: #a156b2;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container" id="login-section">
         <h1>Đăng nhập</h1>
         <form id="login-form">
             <input type="text" id="name" placeholder="Nhập tên của bạn" required>
@@ -68,14 +177,54 @@
         </form>
     </div>
 
+    <div id="main-section" class="hidden">
+        <header>
+            <h1>Chào mừng đến với DUCDIEUDAO - Dịch vụ đỉnh cao</h1>
+        </header>
+        <div class="container">
+            <h2>Chọn 1 bé để lên mây cùng tối đêm nay</h2>
+            <div class="product-grid" id="product-list"></div>
+        </div>
+        <footer>
+            <p>&copy; DUCDIEUDAO | Hotline: 0982-418-758</p>
+        </footer>
+    </div>
+
     <script>
+        const data = [
+            { name: "Trà Huỳnh Anh Tuấn (Best Seller)", img: "images/hello (4).jpg", height: "165 cm", weight: "68 kg", style: "Cọc cằn", price: "2,000,000 VNĐ", fbLink: "https://www.facebook.com/AnhTussan269?locale=vi_VN" },
+            { name: "Trần Ngọc Pháp", img: "images/hello (6).jpg", height: "169 cm", weight: "75 kg", style: "Bạo lực", price: "1,500,000 VNĐ", fbLink: "https://www.facebook.com/profile.php?id=100074316842841&locale=vi_VN" },
+            { name: "Trần Anh Khoa (Khoa Pug) - Ế quá xả lỗ ", img: "images/hello (2).jpg", height: "172 cm", weight: "61 kg", style: "Tốc độ", price: "300,000 VNĐ", fbLink: "https://facebook.com/khoapughttps://www.facebook.com/profile.php?id=100067044549585&locale=vi_VN" },
+            { name: "Huỳnh Quốc Mỹ", img: "images/hello (5).jpg", height: "170 cm", weight: "52 kg", style: "Chậm mà chắc", price: "1,200,000 VNĐ", fbLink: "https://www.facebook.com/mhiiun?locale=vi_VN" },
+            { name: "Trần Hiếu Nghĩa", img: "images/anh.jpg", height: "176 cm", weight: "80 kg", style: "Ăn tươi nuốt sống con mồi", price: "5,000,000 VNĐ", fbLink: "https://www.facebook.com/yangyangnaihatqb?locale=vi_VN" }
+        ];
+
+        const productList = document.getElementById('product-list');
+        data.forEach(person => {
+            const card = document.createElement('div');
+            card.classList.add('product-card');
+            card.innerHTML = `
+                <img src="${person.img}" alt="${person.name}">
+                <h3>${person.name}</h3>
+                <div class="details">
+                    <p><strong>Chiều cao:</strong> ${person.height}</p>
+                    <p><strong>Cân nặng:</strong> ${person.weight}</p>
+                    <p><strong>Phong cách:</strong> ${person.style}</p>
+                    <p><strong>Giá:</strong> ${person.price}</p>
+                </div>
+                <div class="rating">★★★★★</div>
+                <button onclick="window.open('${person.fbLink}', '_blank')">Chọn ngay</button>
+            `;
+            productList.appendChild(card);
+        });
+
         function validateLogin() {
             const password = document.getElementById('password').value;
-            const validPassword = "ducdeptrai"; // Mật khẩu chính xác
+            const validPassword = "ducdeptrai";
 
             if (password === validPassword) {
-                alert("Đăng nhập thành công!");
-                window.location.href = "index.html"; // Chuyển hướng sang phần 2
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('main-section').classList.remove('hidden');
             } else {
                 alert("Mật khẩu sai! Vui lòng thử lại.");
             }
